@@ -1,5 +1,5 @@
-import { createInvoiceEntity } from '@/models/ddd/invoice/entity'
-import { type InvoiceProps } from '@/models/ddd/invoice/definition'
+import { createInvoiceEntity } from '@/models/invoice/entity'
+import { type InvoiceProps } from '@/models/invoice/definition'
 
 // インフラ層（vue依存不可）
 export const InvoceApi = () => {

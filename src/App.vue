@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
-import { useInvoiceStore } from './composables/stores_new/invoice'
+import { useInvoiceStore } from './composables/stores/invoice'
 
 export default defineComponent({
   setup() {
