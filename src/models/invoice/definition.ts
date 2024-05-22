@@ -1,6 +1,4 @@
-export interface PartnerProps {
-  name: string
-}
+import type { PartnerProps } from '../partner/definition'
 
 export interface InvoiceProps {
   id: number

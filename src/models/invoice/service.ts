@@ -1,5 +1,5 @@
 import { InvoceApi } from '@/api-client/invoice-api'
-import { InvoiceEntity } from './entity-class'
+import { InvoiceEntity } from './entity'
 
 // ドメインサービス層（vue依存不可）
 export const InvoiceService = (api = InvoceApi()) => {

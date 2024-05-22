@@ -1,4 +1,4 @@
-import { createInvoiceEntity } from '@/models/invoice/entity'
+import { createInvoiceEntity } from '@/models/invoice/entity-factory'
 import { type InvoiceProps } from '@/models/invoice/definition'
 
 // インフラ層（vue依存不可）

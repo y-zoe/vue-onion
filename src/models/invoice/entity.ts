@@ -1,50 +1,65 @@
-import { computed, reactive, toRefs, ref, shallowRef } from 'vue'
+import { PartnerEntity } from '../partner/entity'
 import type { InvoiceProps } from './definition'
 
-// ドメイン層（vue依存不可）
-export const createInvoiceEntity = (props: InvoiceProps) => {
-  const accessor = reactive({ ...props })
+export class InvoiceEntity implements InvoiceProps {
+  readonly id!: number
+  name!: string
+  amount!: number
+  partner!: PartnerEntity
+  private source: InvoiceProps
 
-  const partner = {
-    name: accessor.partner.name,
-    nameLength: computed(() => accessor.partner.name.length)
+  constructor(props: InvoiceProps) {
+    this.id = props.id
+    this.init(props)
+    this.source = { ...props }
   }
 
-  const nameErrors = () => {
-    if (accessor.name.length > 3) {
+  private init(props: InvoiceProps) {
+    this.name = props.name
+    this.amount = props.amount
+    this.partner = new PartnerEntity(props.partner)
+  }
+
+  reset() {
+    this.init(this.source)
+  }
+
+  get isEdited() {
+    return (
+      this.name !== this.source.name ||
+      this.amount !== this.source.amount ||
+      this.partner.name !== this.source.partner.name
+    )
+  }
+
+  nameErrors() {
+    if (this.name.length > 3) {
       return ['名前は3文字以内']
     } else {
       return []
     }
   }
 
-  const amountErrors = () => {
-    if (accessor.amount < 300) {
+  amountErrors() {
+    if (this.amount < 300) {
       return ['amountは300以上']
     } else {
       return []
     }
   }
 
-  const getErrorMessages = computed(() => {
+  get errorMessages() {
     return {
-      name: nameErrors(),
-      amount: amountErrors()
+      name: this.nameErrors(),
+      amount: this.amountErrors()
     }
-  })
-
-  const nameLength = computed(() => accessor.name.length)
-  const nameLengthFunc = () => {
-    return accessor.name.length
   }
 
-  return {
-    ...toRefs(accessor),
-    nameLength,
-    errorMessages: getErrorMessages,
-    nameLengthFunc,
-    nameErrors,
-    amountErrors,
-    partner: partner
+  get nameLength() {
+    return this.name.length
+  }
+
+  nameLengthFunc() {
+    return this.name.length
   }
 }

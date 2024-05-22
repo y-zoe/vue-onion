@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { InvoiceService } from '@/models/invoice/service'
-import { InvoiceEntity } from '@/models/invoice/entity-class'
+import { InvoiceEntity } from '@/models/invoice/entity'
 
 // ユースケース層
 export const useInvoiceStore = () => {
